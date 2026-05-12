@@ -18,11 +18,116 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
+<<<<<<< HEAD
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
+=======
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+        <a href="{{ route('home') }}"
+           class="text-2xl font-extrabold tracking-tight">
+            DreamHome
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+
+            <a href="{{ route('home') }}"
+               class="hover:text-neutral-500 transition">
+               Home
+            </a>
+
+            <a href="{{ route('properties.index') }}"
+               class="hover:text-neutral-500 transition">
+               Properties
+            </a>
+
+            @auth
+
+                {{-- CLIENT NAV --}}
+                @if(auth()->user()->role === 'client')
+                    <a href="{{ route('client.home') }}"
+                       class="hover:text-neutral-500 transition">
+                       Client
+                    </a>
+                    <a href="{{ route('feedback.create') }}"
+                       class="hover:text-neutral-500 transition">
+                       Rate Property
+                    </a>
+                @endif
+
+                {{-- STAFF NAV --}}
+                @if(auth()->user()->role === 'staff')
+                    <a href="{{ route('staff.home') }}"
+                       class="hover:text-neutral-500 transition">
+                       Staff
+                    </a>
+
+                    <a href="{{ route('viewings.index') }}"
+                       class="{{ request()->routeIs('viewings.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Viewings
+                    </a>
+
+                    <a href="{{ route('feedback.index') }}"
+                       class="{{ request()->routeIs('feedback.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Feedback
+                    </a>
+
+                    <a href="{{ route('contracts.index') }}"
+                       class="{{ request()->routeIs('contracts.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Contracts
+                    </a>
+                @endif
+
+                {{-- ADMIN NAV --}}
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.home') }}"
+                       class="hover:text-neutral-500 transition">
+                       Admin
+                    </a>
+
+                    <a href="{{ route('viewings.index') }}"
+                       class="{{ request()->routeIs('viewings.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Viewings
+                    </a>
+
+                    <a href="{{ route('feedback.index') }}"
+                       class="{{ request()->routeIs('feedback.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Feedback
+                    </a>
+
+                    <a href="{{ route('contracts.index') }}"
+                       class="{{ request()->routeIs('contracts.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
+                       Contracts
+                    </a>
+                @endif
+
+            @endauth
+        </nav>
+
+        <div class="flex items-center gap-3">
+
+            @guest
+
+                <a href="{{ route('login') }}"
+                   class="px-5 py-2.5 rounded-full border border-neutral-300 hover:bg-white transition text-sm font-medium">
+                    Login
+                </a>
+
+                <a href="{{ route('register') }}"
+                   class="px-5 py-2.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-800 transition text-sm font-medium shadow-lg">
+                    Register
+                </a>
+
+            @else
+
+                <div class="hidden sm:flex items-center gap-3">
+
+                    <div class="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center font-semibold">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+>>>>>>> 7b93e03 (viewing)
                     </div>
                 </header>
             @endisset

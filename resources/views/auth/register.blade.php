@@ -39,15 +39,11 @@
                 ═══════════════════════════════ --}}
                 <div class="dh-fsec active" id="s1">
 
-                    
-                        <div class="dh-fg">
-                           
-                        
-                            <label>Name</label>
-                            <input type="text" name="name"
-                                value="{{ old('name') }}"
-                                placeholder="e.g. Ritchie" required/>
-                        </div>
+                    <div class="dh-fg">
+                        <label>Name</label>
+                        <input type="text" name="name"
+                            value="{{ old('name') }}"
+                            placeholder="e.g. Ritchie" required/>
                     </div>
 
                     <div class="dh-row2">

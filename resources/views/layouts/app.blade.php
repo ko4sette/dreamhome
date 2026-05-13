@@ -25,11 +25,6 @@
 
                 <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
 
-                    <a href="{{ route('home') }}"
-                       class="hover:text-neutral-500 transition">
-                       Home
-                    </a>
-
                     <a href="{{ route('properties.index') }}"
                        class="hover:text-neutral-500 transition">
                        Properties
@@ -74,10 +69,7 @@
 
                         {{-- ADMIN NAV --}}
                         @if(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.home') }}"
-                               class="hover:text-neutral-500 transition">
-                               Admin
-                            </a>
+                          
 
                             <a href="{{ route('viewings.index') }}"
                                class="{{ request()->routeIs('viewings.*') ? 'text-neutral-900 font-semibold' : 'hover:text-neutral-500' }} transition">
@@ -114,10 +106,19 @@
 
                     @else
 
-                        <div class="hidden sm:flex items-center gap-3">
+                        <div class="hidden sm:flex items-center gap-4">
+
+                            <div class="text-right">
+                                <div class="text-sm font-semibold text-neutral-900">
+                                    {{ auth()->user()->name ?? auth()->user()->email }}
+                                </div>
+                                <div class="text-[11px] text-neutral-500 uppercase tracking-[0.2em] mt-1">
+                                    {{ auth()->user()->role ?? 'User' }}
+                                </div>
+                            </div>
 
                             <div class="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center font-semibold">
-                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                {{ strtoupper(substr(auth()->user()->name ?? auth()->user()->email, 0, 1)) }}
                             </div>
 
                             <form method="POST" action="{{ route('logout') }}">

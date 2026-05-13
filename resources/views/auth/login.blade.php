@@ -1,47 +1,96 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<div class="dh-auth-wrap">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    {{-- LEFT: Login Form --}}
+    <div class="dh-auth-panel">
+        <div class="dh-card">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <div class="dh-card-head">
+                <h1>Welcome back</h1>
+                <p>Log in to your DreamHome account to continue browsing properties.</p>
+            </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+            {{-- Session status --}}
+            @if (session('status'))
+                <div class="dh-alert dh-alert-success">{{ session('status') }}</div>
             @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            {{-- Success message from registration --}}
+            @if (session('success'))
+                <div class="dh-alert dh-alert-success">{{ session('success') }}</div>
+            @endif
+
+            {{-- Validation errors --}}
+            @if ($errors->any())
+                <div class="dh-alert dh-alert-error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div class="dh-fg">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email"
+                        value="{{ old('email') }}"
+                        placeholder="your@email.com"
+                        required autofocus autocomplete="username"/>
+                </div>
+
+                <div class="dh-fg">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password"
+                        placeholder="Enter your password"
+                        required autocomplete="current-password"/>
+                </div>
+
+                <div class="dh-remember-row" style="margin-bottom: 14px;">
+                    <label>
+                        <input type="checkbox" name="remember" style="width:auto; margin:0;"/>
+                        Remember me
+                    </label>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}">Forgot password?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="dh-btn-main">Log In</button>
+            </form>
+
+            <div class="dh-divider">or</div>
+
+            <div class="dh-switch">
+                Don't have an account?
+                <a href="{{ route('register') }}">Register here</a>
+            </div>
+
         </div>
-    </form>
+    </div>
+
+    {{-- RIGHT: Decorative Panel --}}
+    <div class="dh-auth-deco">
+        <div class="dh-deco-text">
+            <h2>Find Your Dream Home Today</h2>
+            <p>Browse hundreds of rental properties across the UK — flats, houses, and apartments tailored to your budget.</p>
+        </div>
+        <div class="dh-deco-stat">
+            <div class="dh-stat-item"><div class="num">200+</div><div class="lbl">Properties</div></div>
+            <div class="dh-stat-item"><div class="num">12</div><div class="lbl">Branches</div></div>
+            <div class="dh-stat-item"><div class="num">98%</div><div class="lbl">Satisfaction</div></div>
+        </div>
+        <div class="dh-deco-pills">
+            <div class="dh-deco-pill">Flat</div>
+            <div class="dh-deco-pill">House</div>
+            <div class="dh-deco-pill">Apartment</div>
+            <div class="dh-deco-pill">Budget Friendly</div>
+            <div class="dh-deco-pill">Pet Friendly</div>
+        </div>
+    </div>
+
+</div>
 </x-guest-layout>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Viewing;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -43,6 +44,11 @@ class Property extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id', 'branch_id');
+    }
+
+    public function viewings()
+    {
+        return $this->hasMany(Viewing::class, 'property_id', 'property_id');
     }
 
     public function staff()

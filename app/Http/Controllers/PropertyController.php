@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Owner;
 use App\Models\Branch;
+use App\Models\ViewingFeedback;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -45,7 +46,22 @@ return view('properties.index', compact('properties', 'types'));
 
     public function show(Property $property)
     {
-        return view('properties.show', compact('property'));
+        $feedbackQuery = ViewingFeedback::whereHas('viewing', function ($query) use ($property) {
+            $query->where('property_id', $property->property_id);
+        });
+
+        $avgRating = $feedbackQuery->avg('rating');
+        $feedbackCount = $feedbackQuery->count();
+
+        $hasCompletedViewing = false;
+        if (auth()->check() && auth()->user()->role === 'client') {
+            $hasCompletedViewing = \App\Models\Viewing::where('property_id', $property->property_id)
+                ->where('client_id', auth()->id())
+                ->where('status', 'completed')
+                ->exists();
+        }
+
+        return view('properties.show', compact('property', 'avgRating', 'feedbackCount', 'hasCompletedViewing'));
     }
 
     public function staffIndex()

@@ -22,7 +22,47 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'staff_id'
     ];
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->staff && $this->staff->position === $role;
+    }
+    public function isManager()
+    {
+        return $this->hasRole('Manager');
+    }
+    public function isSupervisor()
+    {
+        return $this->hasRole('Supervisor');
+    }
+    public function isSecretary()
+    {
+        return $this->hasRole('Secretary');
+    }
+    public function isRegularStaff()
+    {
+        return $this->hasRole('Regular staff');
+    }
+
+    public function getRoleAttribute()
+    {
+        if (!$this->staff) {
+            return 'user';
+        }
+        
+        $pos = strtolower($this->staff->position);
+        if ($pos === 'regular staff') {
+            return 'staff';
+        }
+        return $pos;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

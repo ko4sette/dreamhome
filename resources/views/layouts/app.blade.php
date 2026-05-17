@@ -19,8 +19,7 @@
             @auth
                 <div class="flex min-h-screen">
                     @include('layouts.partials.sidebar')
-                    <div class="flex-1">
-                        @include('layouts.navigation')
+                    <div class="flex-1 ml-72">
 
                         @isset($header)
                             <header class="bg-[#E2DFCF] shadow">

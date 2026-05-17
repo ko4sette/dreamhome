@@ -14,12 +14,12 @@ class StaffManagementController extends Controller
         
         // Ensure managers only see staff within their assigned branch
         if ($user->staff && $user->staff->branch_id) {
-            $staffList = Staff::with(['supervisor', 'branch'])
+            $staffList = Staff::with(['supervisor', 'branch', 'nextOfKin'])
                 ->where('branch_id', $user->staff->branch_id)
                 ->get();
         } else {
             // Fallback if the manager is not explicitly tied to a branch
-            $staffList = Staff::with(['supervisor', 'branch'])->get();
+            $staffList = Staff::with(['supervisor', 'branch', 'nextOfKin'])->get();
         }
 
         return view('manager.StaffManagement.index', compact('staffList'));

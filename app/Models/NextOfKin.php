@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NextOfKin extends Model
 {
+    protected $table = 'nextofkin';
     protected $primaryKey = 'next_of_kin_id';
     protected $fillable = [
         'staff_id', 'name', 'relationship', 'address', 'telephone'

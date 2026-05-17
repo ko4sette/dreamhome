@@ -10,7 +10,7 @@ class Staff extends Model
     protected $fillable = [
         'branch_id', 'name', 'surname', 'supervisor_id',
         'address', 'telephone', 'gender', 'date_of_birth',
-        'nin', 'position', 'salary', 'date_started'
+        'nin', 'position', 'salary', 'car_allowance', 'bonus', 'date_started'
     ];
 
     public function branch()

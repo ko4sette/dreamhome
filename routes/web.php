@@ -35,8 +35,12 @@ Route::middleware(['auth', 'role:manager'])
         
         // RBAC Navigation mapped to manager folders
         Route::get('/StaffManagement', [StaffManagementController::class, 'index'])->name('StaffManagement.index');
+        Route::post('/StaffManagement', [StaffManagementController::class, 'store'])->name('StaffManagement.store');
+        Route::post('/StaffManagement/assign/{supervisorId}', [StaffManagementController::class, 'updateAssignment'])->name('StaffManagement.assign');
+        Route::post('/StaffManagement/nextofkin', [StaffManagementController::class, 'storeNextOfKin'])->name('StaffManagement.nextofkin');
         Route::get('/Branchreport', [BranchreportController::class, 'index'])->name('Branchreport.index');
         Route::get('/StaffReport', [StaffReportController::class, 'index'])->name('StaffReport.index');
+        Route::post('/StaffReport/financials', [StaffReportController::class, 'updateFinancials'])->name('StaffReport.financials');
     });
 
 // Supervisor Routes

@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-[#E2DFCF] border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-
+            
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @auth
                     <x-dropdown align="right" width="48">
@@ -64,19 +64,21 @@
         </div>
     </div>
 
+    <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-                <x-responsive-nav-link :href="route(auth()->user()->role . '.dashboard')" :active="request()->routeIs(auth()->user()->role . '.*')">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
+                @if(auth()->user()->isManager())
+                    <x-responsive-nav-link :href="route('manager.dashboard')" :active="request()->routeIs('manager.dashboard')">Dashboard</x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('manager.StaffManagement.index')" :active="request()->routeIs('manager.StaffManagement.index')">Staff Management</x-responsive-nav-link>
+                @elseif(auth()->user()->isSupervisor())
+                    <x-responsive-nav-link :href="route('supervisor.dashboard')" :active="request()->routeIs('supervisor.dashboard')">Dashboard</x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('supervisor.properties.index')">Property Management</x-responsive-nav-link>
+                @else
+                    <x-responsive-nav-link :href="route(auth()->user()->role . '.dashboard')" :active="request()->routeIs(auth()->user()->role . '.*')">Dashboard</x-responsive-nav-link>
+                @endif
             @else
-                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('Login') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('Register') }}
-                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">{{ __('Login') }}</x-responsive-nav-link>
             @endauth
         </div>
 
@@ -94,7 +96,6 @@
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-
                         <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">

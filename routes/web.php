@@ -29,7 +29,11 @@ Route::middleware(['auth', 'role:manager'])
     ->name('manager.')
     ->group(function () {
         Route::get('/dashboard', [ManagerDashboard::class, 'index'])->name('dashboard');
-        // Add more manager routes here
+        
+        // RBAC Navigation mapped to manager folders
+        Route::get('/StaffManagement', function() { return view('manager.StaffManagement.index'); })->name('StaffManagement.index');
+        Route::get('/Branchreport', function() { return view('manager.Branchreport.index'); })->name('Branchreport.index');
+        Route::get('/StaffReport', function() { return view('manager.StaffReport.index'); })->name('StaffReport.index');
     });
 
 // Supervisor Routes
@@ -38,7 +42,12 @@ Route::middleware(['auth', 'role:supervisor'])
     ->name('supervisor.')
     ->group(function () {
         Route::get('/dashboard', [SupervisorDashboard::class, 'index'])->name('dashboard');
-        // Add more supervisor routes here
+        
+        // RBAC Navigation Stubs
+        Route::get('/properties/create', function() { return view('dashboard'); })->name('properties.create');
+        Route::get('/properties', function() { return view('dashboard'); })->name('properties.index');
+        Route::get('/rentals', function() { return view('dashboard'); })->name('rentals.index');
+        Route::get('/owners', function() { return view('dashboard'); })->name('owners.index');
     });
 
 // Secretary Routes

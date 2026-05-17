@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\DashboardController as ManagerDashboard;
+use App\Http\Controllers\Manager\StaffManagementController;
+use App\Http\Controllers\Manager\BranchreportController;
+use App\Http\Controllers\Manager\StaffReportController;
 use App\Http\Controllers\Supervisor\DashboardController as SupervisorDashboard;
 use App\Http\Controllers\Secretary\DashboardController as SecretaryDashboard;
 use App\Http\Controllers\Staff\DashboardController as StaffDashboard;
@@ -31,9 +34,9 @@ Route::middleware(['auth', 'role:manager'])
         Route::get('/dashboard', [ManagerDashboard::class, 'index'])->name('dashboard');
         
         // RBAC Navigation mapped to manager folders
-        Route::get('/StaffManagement', function() { return view('manager.StaffManagement.index'); })->name('StaffManagement.index');
-        Route::get('/Branchreport', function() { return view('manager.Branchreport.index'); })->name('Branchreport.index');
-        Route::get('/StaffReport', function() { return view('manager.StaffReport.index'); })->name('StaffReport.index');
+        Route::get('/StaffManagement', [StaffManagementController::class, 'index'])->name('StaffManagement.index');
+        Route::get('/Branchreport', [BranchreportController::class, 'index'])->name('Branchreport.index');
+        Route::get('/StaffReport', [StaffReportController::class, 'index'])->name('StaffReport.index');
     });
 
 // Supervisor Routes

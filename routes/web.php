@@ -7,6 +7,9 @@ use App\Http\Controllers\Manager\StaffManagementController;
 use App\Http\Controllers\Manager\BranchreportController;
 use App\Http\Controllers\Manager\StaffReportController;
 use App\Http\Controllers\Supervisor\DashboardController as SupervisorDashboard;
+use App\Http\Controllers\Supervisor\TeamManagementController as SupervisorTeamManagement;
+use App\Http\Controllers\Supervisor\PropertyManagementController as SupervisorPropertyManagement;
+use App\Http\Controllers\Supervisor\BranchOfficeController as SupervisorBranchOffice;
 use App\Http\Controllers\Secretary\DashboardController as SecretaryDashboard;
 use App\Http\Controllers\Staff\DashboardController as StaffDashboard;
 
@@ -49,12 +52,10 @@ Route::middleware(['auth', 'role:supervisor'])
     ->name('supervisor.')
     ->group(function () {
         Route::get('/dashboard', [SupervisorDashboard::class, 'index'])->name('dashboard');
-        
-        // RBAC Navigation Stubs
-        Route::get('/properties/create', function() { return view('dashboard'); })->name('properties.create');
-        Route::get('/properties', function() { return view('dashboard'); })->name('properties.index');
-        Route::get('/rentals', function() { return view('dashboard'); })->name('rentals.index');
-        Route::get('/owners', function() { return view('dashboard'); })->name('owners.index');
+        // RBAC Navigation
+        Route::get('/TeamManagement', [SupervisorTeamManagement::class, 'index'])->name('TeamManagement.index');
+        Route::get('/PropertyManagement', [SupervisorPropertyManagement::class, 'index'])->name('PropertyManagement.index');
+        Route::get('/BranchOffice', [SupervisorBranchOffice::class, 'index'])->name('BranchOffice.index');
     });
 
 // Secretary Routes

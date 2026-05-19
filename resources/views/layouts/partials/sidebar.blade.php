@@ -47,19 +47,22 @@
                             Branch Reports
                         </a>
                         <a href="{{ route('manager.StaffReport.index') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('manager.StaffReport.*') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
-                            Staffs Records
+                            Financial Records   
                         </a>
                         @break
 
                     @case('supervisor')
                         <a href="{{ route('supervisor.dashboard') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.dashboard') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
-                            Home
+                            Dashboard
                         </a>
-                        <a href="{{ route('supervisor.properties.create') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.properties.create') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
-                            Staffs Management
+                        <a href="{{ route('supervisor.TeamManagement.index') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.TeamManagement.*') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
+                            Team Management
                         </a>
-                        <a href="{{ route('supervisor.properties.index') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.properties.index') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
+                        <a href="{{ route('supervisor.PropertyManagement.index') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.PropertyManagement.*') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
                             Property Management
+                        </a>
+                        <a href="{{ route('supervisor.BranchOffice.index') }}" class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium transition {{ $active('supervisor.BranchOffice.*') ? 'bg-white/10 text-white' : 'text-neutral-400 hover:bg-white/5 hover:text-white' }}">
+                            Branch Office
                         </a>
                         @break
 

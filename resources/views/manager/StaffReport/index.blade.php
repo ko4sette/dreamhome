@@ -121,14 +121,13 @@
                                             <div>
                                                 <label for="car_allowance" class="block text-sm font-bold text-[#3E4E35]">Annual Car Allowance (₱)</label>
                                                 <input type="number" step="0.01" name="car_allowance" id="car_allowance" x-model="activeCarAllowance" class="mt-1 focus:ring-[#3E4E35] focus:border-[#3E4E35] block w-full shadow-sm sm:text-sm border-[#3E4E35] rounded-md bg-white text-[#3E4E35]">
-                                                <p class="mt-1 text-xs text-gray-600">Case Study: Each manager is allocated an annual car allowance.</p>
                                             </div>
 
                                             <!-- Monthly Bonus -->
                                             <div>
                                                 <label for="bonus" class="block text-sm font-bold text-[#3E4E35]">Monthly Bonus (₱)</label>
                                                 <input type="number" step="0.01" name="bonus" id="bonus" x-model="activeBonus" class="mt-1 focus:ring-[#3E4E35] focus:border-[#3E4E35] block w-full shadow-sm sm:text-sm border-[#3E4E35] rounded-md bg-white text-[#3E4E35]">
-                                                <p class="mt-1 text-xs text-gray-600">Based upon performance in the property for rent market.</p>
+
                                             </div>
                                         </div>
                                     </div>

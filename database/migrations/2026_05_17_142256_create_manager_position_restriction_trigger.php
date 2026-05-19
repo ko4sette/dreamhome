@@ -28,7 +28,8 @@ return new class extends Migration
                 -- If the person performing the action is a manager
                 IF current_user_role = 'manager' THEN
                     -- They cannot create or update a staff member to the position of 'Manager'
-                    IF NEW.position = 'Manager' THEN
+                    -- We only want to block if they are actually changing the position to 'Manager'
+                    IF NEW.position = 'Manager' AND (TG_OP = 'INSERT' OR OLD.position IS DISTINCT FROM 'Manager') THEN
                         RAISE EXCEPTION 'Security Policy Violation: A Manager is not authorized to assign the Manager position to any staff member.';
                     END IF;
                 END IF;
